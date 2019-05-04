@@ -9,4 +9,12 @@ public class TimeStampLog {
 	public TimeStampLog() {
 		sectionsWatched = new ArrayList<ViewLog>(); 
 	}
+	
+	public void addViewLog(ViewLog view) {
+		
+	}
+	
+	public String toString() {
+		return "";
+	}
 }
