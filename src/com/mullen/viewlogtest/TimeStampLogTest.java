@@ -108,6 +108,6 @@ class TimeStampLogTest {
 		log.addViewLog(seven);
 		log.addViewLog(eight);
 		
-		assertEquals(log.toString(), "500-700,1000-9000,9500-11500,15000-98000,\n93250 millisecond watched.");
+		assertEquals(log.toString(), "500-750,1000-9000,9500-11500,15000-98000,\n93250 milliseconds watched.");
 	}
 }
