@@ -27,12 +27,14 @@ public class TimeStampLog {
 		//If the new ViewLog ends before any other ViewLog starts, it is placed in the front of the ArrayList.
 		if (view.getEndTime() <= sectionsWatched.get(0).getStartTime()) {
 			sectionsWatched.add(0, view);
+			combineTimes();
 			return;
 		}
 		
 		//If the new ViewLog starts after all other ViewLogs have ended, it is placed at the end of the ArrayList.
 		if (view.getStartTime() >= sectionsWatched.get(sectionsWatched.size()-1).getEndTime()) {
 			sectionsWatched.add(view);
+			combineTimes();
 			return;
 		}
 		
@@ -41,6 +43,7 @@ public class TimeStampLog {
 			if (view.getStartTime() > sectionsWatched.get(i).getEndTime() &&
 				view.getEndTime() < sectionsWatched.get(i + 1).getStartTime()) {
 				sectionsWatched.add(i+1, view);
+				combineTimes();
 				return;
 			}
 		}
@@ -51,11 +54,32 @@ public class TimeStampLog {
 			if (view.getStartTime() < sectionsWatched.get(i).getEndTime() &&
 					view.getEndTime() >= sectionsWatched.get(i).getEndTime()) {
 				sectionsWatched.get(i).setEndTime(view.getEndTime());
+				combineTimes();
 			}
 			
 			if (view.getEndTime() > sectionsWatched.get(i).getStartTime() &&
 					view.getStartTime() <= sectionsWatched.get(i).getStartTime()) {
 				sectionsWatched.get(i).setStartTime(view.getStartTime());
+				combineTimes();
+			}
+		}
+	}
+	
+	/**
+	 * This method combines sections in the sectionsWatched ArrayList that overlap
+	 * or butt up against each other.
+	 */
+	public void combineTimes() {
+		//If the sectionsWatched ArrayList is empty, the nothing happens.
+		if (sectionsWatched.size() == 0) {return;}
+		/*Iterates through the sectionsWatched ArrayList and combines overlapping
+		 * and adjacent sections.
+		 */
+		for (int i = sectionsWatched.size() - 1; i > 0; i--) {
+			if (sectionsWatched.get(i).getStartTime() - 1 <=
+					sectionsWatched.get(i-1).getEndTime()) {
+				sectionsWatched.get(i-1).setEndTime(sectionsWatched.get(i).getEndTime());
+				sectionsWatched.remove(i);
 			}
 		}
 	}
