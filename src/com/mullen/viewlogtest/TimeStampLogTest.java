@@ -34,7 +34,7 @@ class TimeStampLogTest {
 	    TimeStampLog log = new TimeStampLog();
 	
 	    ViewLog one = new ViewLog(1000, 2000);
-	    ViewLog two = new ViewLog(3500, 4000);
+	    ViewLog two = new ViewLog(3000, 4000);
 	    
 	    log.addViewLog(one);
 	    log.addViewLog(two);
@@ -46,7 +46,7 @@ class TimeStampLogTest {
 	    log.addViewLog(three);
 	    log.addViewLog(four);
 	    
-	    assertEquals(log.toString(), "1000-2000, 3000-4000,\n2000 milliseconds watched.");
+	    assertEquals(log.toString(), "1000-2000,3000-4000,\n2000 milliseconds watched.");
 	}
 	
 	/**
