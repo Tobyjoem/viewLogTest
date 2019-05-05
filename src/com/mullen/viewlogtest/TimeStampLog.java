@@ -44,6 +44,20 @@ public class TimeStampLog {
 				return;
 			}
 		}
+		
+		
+		
+		for (int i = 0; i < sectionsWatched.size(); i++) {
+			if (view.getStartTime() < sectionsWatched.get(i).getEndTime() &&
+					view.getEndTime() >= sectionsWatched.get(i).getEndTime()) {
+				sectionsWatched.get(i).setEndTime(view.getEndTime());
+			}
+			
+			if (view.getEndTime() > sectionsWatched.get(i).getStartTime() &&
+					view.getStartTime() <= sectionsWatched.get(i).getStartTime()) {
+				sectionsWatched.get(i).setStartTime(view.getStartTime());
+			}
+		}
 	}
 	
 	/**
