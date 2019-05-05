@@ -23,7 +23,7 @@ class TimeStampLogTest {
 		log.addViewLog(three);
 		log.addViewLog(four);
 		
-		assertEquals(log.toString(), "123-795,846-1952,2000-2300,2400,2500\n2178 milliseconds watched.");
+		assertEquals(log.toString(), "123-795,846-1952,2000-2300,2400-2500,\n2178 milliseconds watched.");
 	}
 	
 	/**
