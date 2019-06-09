@@ -89,12 +89,12 @@ public class TimeStampLog {
 	 * 
 	 * @return The total time in milliseconds
 	 */
-	public int getTotalTimeWatched() {
-		int totalTimeWatched = 0;
+	public int getUTV() {
+		int utv = 0;
 		for (ViewLog view : sectionsWatched) {
-			totalTimeWatched += (view.getEndTime() - view.getStartTime());
+			utv += (view.getEndTime() - view.getStartTime());
 		}
-		return totalTimeWatched;
+		return utv;
 	}
 	
 	@Override
@@ -105,7 +105,7 @@ public class TimeStampLog {
 			results = results + view.getStartTime() + "-" + view.getEndTime() + ",";
 		}
 		
-		results = results + "\n" + getTotalTimeWatched() + " milliseconds watched.";
+		results = results + "\n" + getUTV() + " milliseconds watched.";
 		
 		return results;
 	}
