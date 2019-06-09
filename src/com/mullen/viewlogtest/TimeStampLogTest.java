@@ -23,7 +23,7 @@ class TimeStampLogTest {
 		log.addViewLog(three);
 		log.addViewLog(four);
 		
-		assertEquals(log.toString(), "123-795,846-1952,2000-2300,2400-2500,\n2178 milliseconds watched.");
+		assertEquals(log.getUVT(), 2178);
 	}
 	
 	/**
@@ -46,7 +46,7 @@ class TimeStampLogTest {
 	    log.addViewLog(three);
 	    log.addViewLog(four);
 	    
-	    assertEquals(log.toString(), "1000-2000,3000-4000,\n2000 milliseconds watched.");
+	    assertEquals(log.getUVT(), 2000);
 	}
 	
 	/**
@@ -62,7 +62,7 @@ class TimeStampLogTest {
 		log.addViewLog(one);
 		log.addViewLog(two);
 		
-		assertEquals(log.toString(), "1000-3000,\n2000 milliseconds watched.");
+		assertEquals(log.getUVT(), 2000);
 	}
 	
 	/**
@@ -80,7 +80,7 @@ class TimeStampLogTest {
 		log.addViewLog(two);
 		log.addViewLog(three);
 		
-		assertEquals(log.toString(), "500-7000,\n6500 milliseconds watched.");
+		assertEquals(log.getUVT(), 6500);
 	}
 	
 	/**
@@ -108,6 +108,6 @@ class TimeStampLogTest {
 		log.addViewLog(seven);
 		log.addViewLog(eight);
 		
-		assertEquals(log.toString(), "500-750,1000-9000,9500-11500,15000-98000,\n93250 milliseconds watched.");
+		assertEquals(log.getUVT(), 93250);
 	}
 }
