@@ -1,6 +1,7 @@
 package com.mullen.viewlogtest;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class TimeStampLog {
 
@@ -18,51 +19,14 @@ public class TimeStampLog {
 	 * @param view The ViewLog detailing the start and end times of the viewer's watching session
 	 */
 	public void addViewLog(ViewLog view) {
-		//If the ArrayList is empty, then the new section is unique.
-		if (sectionsWatched.isEmpty()) {
-			sectionsWatched.add(view);
-			return;
-		}
-		
-		//If the new ViewLog ends before any other ViewLog starts, it is placed in the front of the ArrayList.
-		if (view.getEndTime() <= sectionsWatched.get(0).getStartTime()) {
-			sectionsWatched.add(0, view);
-			combineTimes();
-			return;
-		}
-		
-		//If the new ViewLog starts after all other ViewLogs have ended, it is placed at the end of the ArrayList.
-		if (view.getStartTime() >= sectionsWatched.get(sectionsWatched.size()-1).getEndTime()) {
-			sectionsWatched.add(view);
-			combineTimes();
-			return;
-		}
-		
-		//If the new ViewLog falls completely between two existing ViewLogs, the new ViewLog is placed between them.
-		for (int i = 0; i < sectionsWatched.size(); i++) {
-			if (view.getStartTime() > sectionsWatched.get(i).getEndTime() &&
-				view.getEndTime() < sectionsWatched.get(i + 1).getStartTime()) {
-				sectionsWatched.add(i+1, view);
-				combineTimes();
+		for (ViewLog section : sectionsWatched) {
+			if (view.getStartTime() >= section.getStartTime() && view.getEndTime() <= section.getEndTime()) {
 				return;
 			}
 		}
-		
-		
-		
-		for (int i = 0; i < sectionsWatched.size(); i++) {
-			if (view.getStartTime() < sectionsWatched.get(i).getEndTime() &&
-					view.getEndTime() >= sectionsWatched.get(i).getEndTime()) {
-				sectionsWatched.get(i).setEndTime(view.getEndTime());
-				combineTimes();
-			}
-			
-			if (view.getEndTime() > sectionsWatched.get(i).getStartTime() &&
-					view.getStartTime() <= sectionsWatched.get(i).getStartTime()) {
-				sectionsWatched.get(i).setStartTime(view.getStartTime());
-				combineTimes();
-			}
-		}
+		sectionsWatched.add(view);
+		Collections.sort(sectionsWatched);
+		combineTimes();
 	}
 	
 	/**
@@ -97,6 +61,11 @@ public class TimeStampLog {
 		return uvt;
 	}
 	
+	
+	public ArrayList<ViewLog> getSectionsWatched() {
+		return sectionsWatched;
+	}
+
 	@Override
 	public String toString() {
 		String results = "";

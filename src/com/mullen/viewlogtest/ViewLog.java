@@ -1,10 +1,10 @@
 package com.mullen.viewlogtest;
 
-public class ViewLog {
+public class ViewLog implements Comparable<ViewLog>{
 
 	//Fields
-	private int startTime;
-	private int endTime;
+	private Integer startTime;
+	private Integer endTime;
 	
 	//Constructor
 	public ViewLog(int startTime, int endTime) {
@@ -13,7 +13,7 @@ public class ViewLog {
 	}
 	
 	//Getters and Setters
-	public int getStartTime() {
+	public Integer getStartTime() {
 		return startTime;
 	}
 	
@@ -21,7 +21,7 @@ public class ViewLog {
 		this.startTime = startTime;
 	}
 	
-	public int getEndTime() {
+	public Integer getEndTime() {
 		return endTime;
 	}
 	
@@ -31,5 +31,14 @@ public class ViewLog {
 	
 	public int getRunTime() {
 		return endTime-startTime;
+	}
+	
+	@Override
+	public int compareTo(ViewLog other) {
+	     int result = this.getStartTime().compareTo(other.getStartTime());
+	     if (result == 0) {
+	          result = this.getEndTime().compareTo(other.getEndTime());
+	     }
+	     return result;
 	}
 }

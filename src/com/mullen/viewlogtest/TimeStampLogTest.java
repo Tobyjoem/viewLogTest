@@ -23,6 +23,7 @@ class TimeStampLogTest {
 		log.addViewLog(three);
 		log.addViewLog(four);
 		
+		System.out.println(log.toString());
 		assertEquals(log.getUVT(), 2178);
 	}
 	
